@@ -15,16 +15,22 @@ import { Ionicons } from "@expo/vector-icons";
 
 const FirstScreen = () => {
   let newGoals;
-  const [, setgoal] = useState("");
+  const [goal, setgoal] = useState("");
   const [goalList, setgoalList] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  const saveHandler = (goal) => {
+  const saveHandler = (goal, goalDes, imageUrl) => {
     setgoal(goal);
     setgoalList((prevGoals) => [
       ...prevGoals,
-      { id: Math.random().toString(), value: goal },
+      {
+        id: Math.random().toString(),
+        value: goal,
+        description: goalDes,
+        url: imageUrl,
+      },
     ]);
+    setShowModal(false);
   };
 
   const deleteHandler = (id) => {
