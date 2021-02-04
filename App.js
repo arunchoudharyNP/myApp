@@ -1,21 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React,{useState,useEffect} from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
+import FirstScreen from "./Components/FirstScreen";
+
+
 
 export default function App() {
+
+ const title =" First Screen";
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styling.container}>
+      
+       <FirstScreen getTitle={title}   />
+
+      {/* <StatusBar style="transparent" /> */}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const styling = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    
   },
 });
