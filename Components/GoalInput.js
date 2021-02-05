@@ -18,7 +18,7 @@ const GoalInput = (props) => {
   }, [data]);
 
   console.log(goal, goalDes, imageUrl);
-5
+
   console.log(" data in goal input  " + data.value);
   return (
     <View style={styles.inputContainer}>
