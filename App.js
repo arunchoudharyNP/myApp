@@ -13,7 +13,7 @@ export default function App() {
       
        <FirstScreen getTitle={title}   />
 
-      {/* <StatusBar style="transparent" /> */}
+      <StatusBar style="transparent" />
     </View>
   );
 }

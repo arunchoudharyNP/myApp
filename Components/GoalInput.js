@@ -1,16 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, TextInput, View, StyleSheet, Button } from "react-native";
 
 const GoalInput = (props) => {
   const [goal, setgoal] = useState("");
   const [goalDes, setgoalDes] = useState("");
   const [imageUrl, setimageUrl] = useState("");
+  const [id, setid] = useState("");
+  let data = props.data;
 
-  console.log();
+  useEffect(() => {
+    if (data) {
+      setid(data.id)
+      setgoal(data.value);
+      setgoalDes(data.description);
+      setimageUrl(data.url);
+    }
+  }, [data]);
+
+  console.log(goal, goalDes, imageUrl);
+5
+  console.log(" data in goal input  " + data.value);
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.inputHeader}> Goal </Text>
       <TextInput
+        value={goal}
         style={styles.input}
         placeholder=" Enter your Goal"
         onChangeText={(text) => {
@@ -19,6 +33,7 @@ const GoalInput = (props) => {
       />
       <Text style={styles.inputHeader}> Goal Description </Text>
       <TextInput
+        value={goalDes}
         style={styles.input}
         placeholder=" Enter your Goal Description"
         onChangeText={(text) => {
@@ -27,6 +42,7 @@ const GoalInput = (props) => {
       />
       <Text style={styles.inputHeader}> Image Url </Text>
       <TextInput
+        value={imageUrl}
         style={styles.input}
         placeholder="Enter your Image Url"
         onChangeText={(text) => {
@@ -36,7 +52,8 @@ const GoalInput = (props) => {
       <Button
         title="Submit"
         onPress={() => {
-          props.onSave(goal, goalDes, imageUrl)
+          props.onSave(id,goal, goalDes, imageUrl);
+           setid("");
         }}
       />
     </View>

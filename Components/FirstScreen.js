@@ -15,21 +15,39 @@ import { Ionicons } from "@expo/vector-icons";
 
 const FirstScreen = () => {
   let newGoals;
+
   const [goal, setgoal] = useState("");
   const [goalList, setgoalList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+   const [editdata, setEditdata] = useState({});
 
-  const saveHandler = (goal, goalDes, imageUrl) => {
+
+  const saveHandler = (id,goal, goalDes, imageUrl) => {
+     let changeArray;
+    
     setgoal(goal);
-    setgoalList((prevGoals) => [
-      ...prevGoals,
-      {
-        id: Math.random().toString(),
-        value: goal,
-        description: goalDes,
-        url: imageUrl,
-      },
-    ]);
+  
+    if(id){
+     changeArray= goalList.filter(x => x.id!=id)    
+    // console.log("  array of edit data  "+changeArray[0].id);
+     
+    setgoalList([...changeArray,{id:id,value:goal,description:goalDes,url:imageUrl}]);
+    setEditdata({});
+
+    }
+    else{
+      setgoalList((prevGoals) => [
+        ...prevGoals,
+        {
+          id: Math.random().toString(),
+          value: goal,
+          description: goalDes,
+          url: imageUrl,
+        },
+      ]);
+
+    }
+   
     setShowModal(false);
   };
 
@@ -38,6 +56,14 @@ const FirstScreen = () => {
 
     setgoalList(newGoals);
   };
+
+  const editHandler=(data)=>{
+    console.log(data);
+   setEditdata(data)
+    console.log("edit data  "+ editdata.value);
+ setShowModal(true);
+
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -51,10 +77,11 @@ const FirstScreen = () => {
           setShowModal(false);
         }}
       >
-        <GoalInput onSave={saveHandler} />
+        <GoalInput data={editdata}   onSave={saveHandler} />
         <TouchableOpacity
           onPress={() => {
             setShowModal(false);
+            setEditdata({});
           }}
           style={{ position: "absolute", top: 10, right: 10 }}
         >
@@ -82,7 +109,7 @@ const FirstScreen = () => {
       <FlatList
         data={goalList}
         renderItem={(itemData) => (
-          <GoalList onDelete={deleteHandler} itemData={itemData} />
+          <GoalList  editData={ editHandler}  onDelete={deleteHandler} itemData={itemData} />
         )}
         keyExtractor={(item) => item.id}
       />
