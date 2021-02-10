@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     height: 250,
     borderRadius: 10,
     borderWidth: 1,
-    overflow:"hidden"
+   
   },
   tinyLogo: {
     margin: 2,
@@ -61,8 +61,7 @@ const styles = StyleSheet.create({
   },
   image:{
    width:"100%",
-   height:180,
-  
+   height:180,  
 
   }
 });

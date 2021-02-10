@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, TextInput, View, StyleSheet, Button } from "react-native";
+import ButtonCom from "./helpingComponents/ButtonCom";
+import InputCom from "./helpingComponents/InputCom";
 
 const GoalInput = (props) => {
   const [goal, setgoal] = useState("");
@@ -10,7 +12,7 @@ const GoalInput = (props) => {
 
   useEffect(() => {
     if (data) {
-      setid(data.id)
+      setid(data.id);
       setgoal(data.value);
       setgoalDes(data.description);
       setimageUrl(data.url);
@@ -22,15 +24,32 @@ const GoalInput = (props) => {
   console.log(" data in goal input  " + data.value);
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.inputHeader}> Goal </Text>
-      <TextInput
+      {/* <Text style={styles.inputHeader}> Goal </Text> */}
+      {/* <TextInput
         value={goal}
         style={styles.input}
         placeholder=" Enter your Goal"
         onChangeText={(text) => {
           setgoal(text);
         }}
+      /> */}
+
+      <InputCom
+        titleStyle={{
+          marginLeft: 15,
+          paddingVertical: 10,
+          fontSize: 24,
+          fontWeight: "700",
+        }}
+        title="Goal"
+        value={goal}
+        borderBottom
+        placeholder="Enter your Goal"
+        onChangeText={(text) => {
+          setgoal(text);
+        }}
       />
+
       <Text style={styles.inputHeader}> Goal Description </Text>
       <TextInput
         value={goalDes}
@@ -49,13 +68,28 @@ const GoalInput = (props) => {
           setimageUrl(text);
         }}
       />
-      <Button
+      {/* Old button */}
+      {/* <Button
         title="Submit"
         onPress={() => {
           props.onSave(id,goal, goalDes, imageUrl);
            setid("");
         }}
-      />
+      /> */}
+
+      <ButtonCom
+        onPress={() => {
+          props.onSave(id, goal, goalDes, imageUrl);
+          setid("");
+        }}
+        round
+        color="green"
+        margin={10}
+        center
+        padding={10}
+      >
+        <Text style={{ color: "white" }}>Submit</Text>
+      </ButtonCom>
     </View>
   );
 };
